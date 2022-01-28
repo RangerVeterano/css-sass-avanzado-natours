@@ -1,0 +1,50 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin centradoPerfecto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// gestor de media query
+
+// 0 - 600 movil,
+// 600 - 900 table vertical,
+// 900 - 1200 tablen en horizontal,
+// 1200 - 1800 escritorios, nuestros estilos se aplican aqui
+// 1800+ pantallas 4 k y eso
+
+//$puntoRuptura argumento opciones: movil,tabVer, tabHor, bdsek
+//1em == 16px
+@mixin responder($puntoRuptura) {
+  @if $puntoRuptura == movil {
+    @media only screen and (max-width: 37.5em) { //600px
+      @content;
+    }
+  }
+
+  @if $puntoRuptura == tabVer {
+    @media only screen and (max-width: 56.25em) { //900px
+      @content;
+    }
+  }
+
+  @if $puntoRuptura == tabHor {
+    @media only screen and (max-width: 75em) { //1200px
+      @content;
+    }
+  }
+
+  @if $puntoRuptura == bdesk {
+    @media only screen and (min-width: 112.5em) { //1800px
+      @content;
+    }
+  }
+}

@@ -1,0 +1,84 @@
+.row {
+  //Hemos definido antes que 1 rem es igual a 16px rem coge su valor de valor más alto
+  //es decir del html
+  max-width: $ancho-grid; //como maximo va a ser de 1140px sino ocupa el 100% de lo que pueda
+
+  @include responder(tabVer) {
+    max-width: 50rem;
+    padding: 0 3rem;
+ }
+
+  margin: 0 auto; //Este es el truco que se usa para centrar elementos en el html
+
+  //Quiere decir que coge todo menos el ultimo hijo, al reves que de normal
+  &:not(:last-child) {
+    //Hemos puesto el margen inferior en todas las lineas menos en la ultima
+    margin-bottom: $espacio-vertical;
+
+    @include responder(tabVer) {
+      margin-bottom: $espacio-vertical-pequeno;
+    }
+  }
+
+  @include clearfix;
+
+  //podemos poner estilos seleccionando un atributo de nuestra web
+  //con el ^= especificamos que el inicio de nuestra clase empiece por lo siguiente
+  //*= significa que selecciones cualquier clase que contenga lo siguente
+  //$= signidica cualquier clase que termine con lo siguiente
+  [class^="col-"] {
+    // background-color: orangered;
+    float: left; //simpre flotan para el lado izquierdo
+
+    //Todas las lineas menos la ultima
+    &:not(:last-child) {
+      margin-right: $espacio-horizontal;
+
+      @include responder(tabVer) {
+        margin-right: 0 !important;
+        margin-bottom: $espacio-vertical-pequeno;
+      }
+    }
+
+    @include responder(tabVer) {
+      width: 100% !important;
+    }
+  }
+
+  .col {
+    &-1-of-2 {
+      //Esta funcion nos permite hacer calculos matemáticos dentro de sass, sin importar el tipo
+      //de dato (px, %, rem, hv, wv,)
+      width: calc((100% - #{$espacio-horizontal}) / 2);
+    }
+
+    &-1-of-3 {
+      //listo
+      width: calc((100% - 2 * #{$espacio-horizontal}) / 3);
+    }
+
+    &-1-of-4 {
+      //listo
+      width: calc((100% - 3 * #{$espacio-horizontal}) / 4);
+    }
+
+    &-2-of-3 {
+      //Estamos sumando los 2 espacios de 1/3 y sumandole el hueco de entre esos dos espacios
+      width: calc(
+        2 * ((100% - 2 * #{$espacio-horizontal}) / 3) + #{$espacio-horizontal}
+      );
+    }
+
+    &-2-of-4 {
+      width: calc(
+        2 * ((100% - 3 * #{$espacio-horizontal}) / 4) + #{$espacio-horizontal}
+      );
+    }
+
+    &-3-of-4 {
+      width: calc(
+        3 * ((100% - 3 * #{$espacio-horizontal}) / 4) + 2 *#{$espacio-horizontal}
+      );
+    }
+  }
+}

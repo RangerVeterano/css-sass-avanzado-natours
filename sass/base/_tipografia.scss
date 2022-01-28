@@ -1,0 +1,93 @@
+//En este fichero van todos los estlos que tiene que ver con la tipografía de nuestra web
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  //font-size: 16px;
+  line-height: 1.7;
+  color: $color-gris-oscuro;
+}
+
+.heading-primary {
+  color: $color-blanco;
+  text-transform: uppercase; //El tecto esté en mayúsculas
+  margin-bottom: 6rem;
+
+
+  &--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    // nombre de la animacion, duracion, retraso animacion, repeticiones
+    animation: moverDentroIzquierda 1s ease-out;
+
+    @include responder(movil) {
+      letter-spacing: 1rem;
+      font-size: 5rem;
+    }
+  }
+
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 2.28rem;
+    animation: moverDentroDerecha 1s ease-out;
+
+    @include responder(movil) {
+      letter-spacing: 0.5rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  //Ahora mismo el elemento se muestra como un bloque entero porque es display:block;
+  //Pero si lo pasamos a display: inline conseguimos que no ocupe todo el hueco
+  display: inline-block; //con esto solo ocupa lo que tenga el elemento
+  //Dar efecto a las letras del gradiente
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  //con esta propiedad hacemos que el color del fondo solo se vea en lo que es el texto
+  -webkit-background-clip: text;
+  background-clip: text;
+  //Indicamos el color del texto transparente para que se vea el color del gradiente
+  color: transparent;
+  letter-spacing: 2px;
+  transition: all 0.2s; //indicamos la duracion de la animacion
+
+  @include responder(tabHor) {
+    font-size: 3rem;
+  }
+
+  @include responder(movil) {
+    font-size: 2.5rem;
+  }
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg);
+    //offset x, offset y, blur,
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2);
+  }
+}
+
+.heading-tertiary {
+  font-size: $tamano-text-predeterminado;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.parrafo {
+  font-size: $tamano-text-predeterminado;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem ;
+  }
+}

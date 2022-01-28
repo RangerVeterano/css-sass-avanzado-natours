@@ -1,0 +1,45 @@
+//Aqui viene las etiquetas de la web, que es el punto más básico que tenemos
+*,
+*::after,
+*::before {
+  //Nos evitamos margenes y padding raros durante el programa
+  margin: 0px;
+  padding: 0px;
+  box-sizing: inherit;
+}
+
+html {
+  //   Indicamos en el nivel mas superior el valor de la fuente para luego cambiarla con usando el tipo de valor rem
+  //   El tamaño por defecto de la fuente es 16  10/16 = 0.625
+  //   Se pone un porcentaje porque de esta forma el usuario se puede poner el tamaño que el deseé
+  font-size: 62.5%;
+
+  @include responder(tabHor) {
+    // width < 900
+    font-size: 56.25%; // 1 rem = 9px 9/16
+  }
+
+  @include responder(tabVer) {
+    //width < 600
+    font-size: 50%; //1 rem  = 8px 8/16
+  }
+
+  @include responder(bdesk) {
+    font-size: 75%; // 1 rem = 12px 12/16
+  }
+}
+
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include responder(tabVer) {
+    padding: 0;
+  }
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-blanco;
+}
+//

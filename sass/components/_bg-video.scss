@@ -1,0 +1,19 @@
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: .15;
+  overflow: hidden;
+  
+  &__contenido {
+      height: 100%;
+      width: 100%;
+
+      //con la siguiente propiedad conseguimos que el video se mantenga dentro
+      //del contenedor que nosotros queremos y que mantenga su relacion de aspecto
+      object-fit: cover;
+  }
+}

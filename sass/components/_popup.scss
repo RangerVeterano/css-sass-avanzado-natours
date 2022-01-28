@@ -1,0 +1,128 @@
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 5000;
+  top: 0;
+  left: 0;
+  background-color: rgba($color-black, 0.8);
+  backdrop-filter: blur(10px);
+
+  //Con esta instruccion comprobamos que el navegador tenga soporte a las propiedades que queremos implementar, en el caso de que no se pueda no se aplican
+  @supports (backdrop-filter: blur(10px)) or
+    (-webkit-backdrop-filter: blur(10px)) {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba($color-black, 0.3);
+  }
+
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:target &__contenido {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &__cerrar {
+    &:link,
+    &:visited {
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      color: $color-gris-oscuro;
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      line-height: 1rem;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__contenido {
+    width: 75%;
+
+    background-color: $color-blanco;
+    @include centradoPerfecto;
+    box-shadow: 0 2rem 4rem rgba($color-black, 0.2);
+    border-radius: 3px;
+    display: table; //Le estamos diciendo que es una tabla falsa pero por medio de css
+    overflow: hidden;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    //Tipo de animacion, duracion de la animacion, retraso de la animacion
+    transition: all 0.4s 0.2s;
+
+    @include responder(movil) {
+      display: block;
+      height: 75vh;
+      overflow-y: scroll;
+    }
+  }
+
+  &__izquierda {
+    width: 33.333333%;
+    display: table-cell;
+
+    @include responder(movil) {
+      display: none; //Quitamos las imágenes de enmedio
+    }
+  }
+
+  &__derecha {
+    width: 66.666667%;
+    display: table-cell;
+    vertical-align: middle; //Solo funciona con las propiedades de "display:table"
+    padding: 3rem 5rem;
+
+    @include responder(movil) {
+      display: inline-block;
+      width: 100%;
+      overflow-y: scroll;
+      text-align: center;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+
+    @include responder(movil) {
+      display: inline-block;
+      width: 50%;
+    }
+  }
+
+  &__texto {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+    text-align: justify;
+    columns: 2;
+    column-gap: 4rem; //1rem == 14 px (por el cambio de fuente de arriba)
+    column-rule: 1px solid $color-gris-claro-2; //muestra un separador de las columnas
+
+    -moz-columns: 2;
+    -moz-column-gap: 4rem;
+    -moz-column-rule: 1px solid $color-gris-claro-2;
+
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto; //Esta propiedad intica como se tiene que dividir la palabra cuando se corta
+
+    @include responder(movil) {
+      columns: 1;
+      -moz-columns: 1;
+    }
+  }
+}

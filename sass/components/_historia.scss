@@ -1,0 +1,99 @@
+.historia {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+  background-color: rgba($color-blanco, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $tamano-text-predeterminado;
+  transform: skewX(-12deg); //doblamos el contenido para hacerlo moderno
+
+  @include responder(tabVer) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  @include responder(movil) {
+    transform: skewX(0deg);
+  }
+
+  //Para que el contenido de dentro no esté doblado marcamos que todos los elementos
+  //de sigan a esta clase se doblen para el lado contrario
+  //No hay forma de poder poner 2 transforms a un elemento sin que se joda todo el contenido
+  //Por lo que tenemos que poner las correcciones a los elemenstos por separado
+
+  &__forma {
+    width: 15rem; //necesita tener alto y ancho para funcionar
+    height: 15rem;
+    float: left; //el elemento tiene que ser flotado
+    position: relative;
+
+    transform: translateX(-3rem) skewX(12deg);
+    overflow: hidden;
+    border-radius: 50%;
+
+    @supports (shape-outside:circle(50%)) or (-webkit-shape-outside:circle(50%)) {
+      //   Efecto que recorta la imagen por la parte de abajo
+      //   Para la forma geométrica tenemos que coger los puntos en sentido de las agujas del reloj
+      //Especificamos la forma del elemento
+      clip-path: circle(50%);
+      -webkitclip-path: circle(50%);
+      //para que el elemento se separe tenemos que darle un margen
+      margin-right: 0.01rem;
+      shape-margin: 0.15rem;
+      -webkit-shape-margin: 0.15rem;
+      // Primero rádio del circulo, Será la mitad de la altura del elemento
+      // Segundo se especifica el centro del circulo, en este caso la mitad y la mitad del cuadrado
+      // Especificamos como flotan los elemento alrededor
+      shape-outside: circle(50%);
+      -webkit-shape-outside: circle(50%); //compatibilidad chrome y safari
+      border-radius: none;
+    }
+
+    @include responder(movil) {
+      transform: translateX(-3rem) skewX(0deg);
+    }
+  }
+
+  &__img {
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    transition: all 0.5s;
+    backface-visibility: hidden;
+  }
+
+  &__texto {
+    transform: skewX(12deg);
+    @include responder(movil) {
+      transform: skewX(0deg);
+    }
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-blanco;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+
+  &:hover &__caption {
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1);
+    -webkit-transform: translateX(-4rem) scale(1);
+    //con esta propiedad podemos poner filtros
+    filter: blur(3px) brightness(80%);
+  }
+}

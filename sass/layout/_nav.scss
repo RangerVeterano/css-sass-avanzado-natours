@@ -1,0 +1,185 @@
+.navegacion {
+  &__caja {
+    display: none;
+    visibility: hidden;
+  }
+
+  &__boton {
+    background-color: $color-blanco;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    z-index: 4002;
+    border-radius: 50%;
+    box-shadow: 0 1rem 3rem rgba($color-black, 0.1);
+    text-align: center;
+    cursor: pointer;
+
+    @include responder(tabVer) {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    @include responder(movil) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
+  }
+
+  //El fondo de la animacion
+  &__fondo {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    background-image: radial-gradient(
+      $color-primary-light,
+      $color-primary-dark
+    );
+    z-index: 4000;
+    //Con el cubic-bezier podemos especificar el comportamiento de la transicion
+    //Esto sustituye a las funciones personalizadas de easein easeout linear etc
+    transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+
+    @include responder(tabVer) {
+      top: 4.3rem;
+      right: 4.3rem;
+    }
+
+    @include responder(movil) {
+      top: 3.8rem;
+      right: 3.8rem;
+    }
+  }
+
+  &__nav {
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 4001;
+    overflow: hidden;
+
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+
+  &__lista {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__item {
+    padding: 1rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-blanco;
+      text-decoration: none;
+      text-transform: uppercase;
+      background-image: linear-gradient(
+        120deg,
+        transparent 50%,
+        $color-blanco 50%
+      );
+      background-size: 221%;
+      transition: all 0.4s;
+      display: inline-block;
+
+      span {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+    }
+
+    &:hover,
+    &:active {
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+
+  //Funcionalidad
+  &__caja:checked ~ &__fondo {
+    transform: scale(80);
+  }
+
+  &__caja:checked ~ &__nav {
+    opacity: 1;
+    width: 100%;
+  }
+
+  //icono de la navegacion
+  &__icono {
+    position: relative;
+    margin-top: 3.3rem;
+
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-gris-oscuro-3;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+
+    &::before {
+      top: -0.8rem;
+      //   transform-origin: right; //con esto especificamos el punto donde queremos que ocurra la transformacion
+    }
+
+    &::after {
+      top: 0.8rem;
+    }
+  }
+
+  //Cuando se haga hover en el boton se espaceará el icono
+  &__boton:hover &__icono::before {
+    top: -1rem;
+  }
+
+  &__boton:hover &__icono::after {
+    top: 1rem;
+  }
+
+  //Hacemos hacemos la animacion de la X
+  &__caja:checked + &__boton &__icono {
+    & {
+      background-color: transparent;
+    }
+
+    &::before {
+      transform: rotate(135deg);
+      top: 0;
+    }
+
+    &::after {
+      transform: rotate(-135deg);
+      top: 0;
+    }
+  }
+}

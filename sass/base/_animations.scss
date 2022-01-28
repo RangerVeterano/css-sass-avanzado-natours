@@ -1,0 +1,48 @@
+//En este archivo vamos a meter todas las animaciones de nuestra web
+
+@keyframes moverDentroIzquierda {
+    0% {
+      /*start*/
+      opacity: 0;
+      transform: translateX(-10rem);
+    }
+  
+    80% {
+      transform: translateX(1rem);
+    }
+  
+    100% {
+      /*finish*/
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+  
+  @keyframes moverDentroDerecha {
+    0% {
+      /*start*/
+      opacity: 0;
+      transform: translateX(10rem);
+    }
+    80% {
+      transform: translateX(-1rem);
+    }
+    100% {
+      /*finish*/
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+  
+  @keyframes moverFueraDentro {
+      0% {
+        /*start*/
+        opacity: 0;
+        transform: translateY(3rem);
+      }
+      100% {
+        /*finish*/
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }

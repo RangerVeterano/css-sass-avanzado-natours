@@ -1,0 +1,47 @@
+//Aqui solo metemos las clases que tienen una utilidad simple
+
+//Como en el caso de esta clase que solo se encarga de centrar texto
+.centrar-texto {
+  text-align: center !important;
+}
+
+.margen-inferior- {
+  &pequeño {
+    margin-bottom: 1.5rem !important;
+    @include responder(movil) {
+      margin-bottom: 1rem !important;
+    }
+  }
+
+  &mediano {
+    margin-bottom: 4rem !important;
+    @include responder(movil) {
+      margin-bottom: 3rem !important;
+    }
+  }
+
+  &grande {
+    margin-bottom: 8rem !important;
+    @include responder(movil) {
+      margin-bottom: 5rem !important;
+    }
+  }
+}
+
+.margen-superior- {
+  &pequeño {
+    margin-top: 1.5rem !important;
+  }
+
+  &mediano {
+    margin-top: 4rem !important;
+  }
+
+  &grande {
+    margin-top: 8rem !important;
+  }
+
+  &enorme {
+    margin-top: 10rem !important;
+  }
+}

@@ -1,0 +1,78 @@
+.footer {
+  background-color: $color-gris-oscuro-3;
+  padding: 10rem;
+  font-size: 1.4rem;
+  color: $color-gris-claro;
+
+  @include responder(tabVer) {
+    padding: 8rem 0;
+  }
+
+  &__logo-box {
+    text-align: center;
+    margin-bottom: 8rem;
+
+    @include responder(tabVer) {
+      margin-bottom:  6rem;
+    }
+  }
+
+  &__logo {
+    width: 15rem;
+    height: auto;
+  }
+
+  &__navigation {
+    border-top: 1px solid $color-gris-oscuro;
+    padding-top: 2rem;
+    display: inline-block;
+
+    @include responder(tabVer) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__item {
+    display: inline-block;
+
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      color: $color-gris-claro;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: inline-block;
+      background-color: $color-gris-oscuro-3;
+      transition: all 0.2s;
+    }
+
+    &:hover,
+    &:active {
+      color: $color-primary;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.8);
+      transform: rotate(5deg) scale(1.2);
+    }
+  }
+
+  &__derechos {
+    border-top: 1px solid $color-gris-oscuro;
+    padding-top: 2rem;
+    width: 80%;
+    float: right;
+
+    @include responder(tabVer) {
+      width: 100%;
+      float: none;
+    }
+  }
+}

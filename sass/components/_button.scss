@@ -1,0 +1,109 @@
+.btn {
+  &,
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all 0.2s;
+    position: relative;
+    font-size: $tamano-text-predeterminado;
+
+    //cambios para la etiqueta "button"
+    border: none;
+    cursor: pointer;
+  }
+
+  //cuando se pasa re raton por encima
+  &:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0rem 0.1rem 2rem rgba($color-black, 0.2);
+
+    //Animacion para el boton princpial
+    &::after {
+      // Con "scale" aumentamos el tamaño del elemento, se le pasa un multiplicador
+      //Aumenta el tamaño del elemento y luego se desvanece
+      transform: scaleX(1.2) scaleY(1.5);
+      opacity: 0;
+    }
+  }
+
+  //Cuando se hace click al boton
+  &:active,
+  &:focus {
+    outline: none;
+    transform: translateY(0.1rem);
+    box-shadow: 0 5px 10px rgba($color-black, 0.2);
+  }
+
+  //modificador para color blanco boton
+  &--white {
+    background-color: $color-blanco;
+    color: $color-gris-oscuro;
+
+    &::after {
+      background-color: $color-blanco;
+    }
+  }
+
+  &--green {
+    background-color: $color-primary;
+    color: $color-blanco;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
+  //Animacion para el boton princpial (creamos el elemento en ese punto por decirlo de alguna forma)
+  &::after {
+    //Se tiene que especificar el contenido para el after, de otra forma no va a funcionar
+    content: "";
+    //Se tiene que especificar también como se muestra el contenido
+    display: inline-block;
+    //Mismas dimensiones que el padre del elemento
+    height: 100%;
+    width: 100%;
+    //En esencia tiene que tener las mismas propiedades que el padre
+    border-radius: 10rem;
+    //Para ponerlo detras de nuestro elemento principal usamos la siguiente propiedad con posicion absoluta
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    //Con el "Backwards" hacemos que los estilos del 0% de la animacion se apliquen antes de funcionar
+    animation: moverFueraDentro 0.5s ease-out 0.75s backwards;
+  }
+}
+
+.btn-text {
+  &:link,
+  &:visited {
+    font-size: $tamano-text-predeterminado;
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 0.1rem solid $color-primary;
+    padding: 0.3rem;
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-blanco;
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.15);
+    transform: translateY(-2px);
+  }
+
+  //Active es en el momento en el que se hace click al elemento
+  &:active {
+    box-shadow: 0 0.5rem 2rem rgba($color-black, 0.15);
+    transform: translateY(0px);
+  }
+}

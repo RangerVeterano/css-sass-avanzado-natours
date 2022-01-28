@@ -1,0 +1,63 @@
+.header {
+  height: 85vh; // El vh quiere decir que la altura  va a ser un 95% de la pantalla que es
+
+  //Esta instruccion solo funciona con scss
+  background-image: linear-gradient(
+      to bottom right,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url("../img/hero-small.jpg");
+  // Siempre intenta hacer que el contenido de la imagen cubra todo el hueco
+  background-size: cover;
+  // Se encarga de que la parte superior de la imagen siempre esté arriba
+  background-position: top;
+
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    //   Efecto que recorta la imagen por la parte de abajo
+    //   Para la forma geométrica tenemos que coger los puntos en sentido de las agujas del reloj
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    position: relative;
+    height: 95vh;
+  }
+
+  //los dpi indican al densidad de los pixeles, este es un estandar
+  // el "," significa or ||
+  @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+    only screen and(-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+    only screen and(min-width: 125em) {
+    background-image: linear-gradient(
+        to bottom right,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)
+      ),
+      url("../img/hero.jpg");
+  }
+
+  //el & copia el nombre de la clase superior
+  @include responder(movil) {
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  //Significa lo mismo que tener .header__logo-box separadrpo
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  //header__logo
+  &__logo {
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
